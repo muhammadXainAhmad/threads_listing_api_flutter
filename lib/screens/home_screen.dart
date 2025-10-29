@@ -11,9 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PostsProvider>(context);
-    final users = provider.users;
-    final posts = provider.posts;
     return Scaffold(
       backgroundColor: whiteClr,
       appBar: AppBar(
@@ -32,78 +29,86 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body:
-          provider.isLoading
-              ? const Center(
-                child: CircularProgressIndicator(
-                  color: blackClr,
-                  strokeWidth: 2,
-                ),
-              )
-              : RefreshIndicator(
-                backgroundColor: whiteClr,
-                color: blackClr,
-                onRefresh: () => provider.fetchData(),
-                child: ListView.builder(
-                  itemCount: posts.length,
-                  itemBuilder: (context, index) {
-                    final post = posts[index];
-                    final user = users[index % users.length];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
-                        vertical: 12,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => PostScreen(
-                                    postTitle: post.title!,
-                                    postBody: post.body!,
-                                  ),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 28,
-                              backgroundImage: AssetImage(
-                                chatPics[Random().nextInt(20)],
+      body: Consumer<PostsProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(color: blackClr, strokeWidth: 2),
+            );
+          }
+          if (provider.error != null) {
+            return Center(child: Text("Error: ${provider.error}"));
+          }
+
+          final users = provider.users;
+          final posts = provider.posts;
+
+          return RefreshIndicator(
+            backgroundColor: whiteClr,
+            color: blackClr,
+            onRefresh: () => provider.fetchData(),
+            child: ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                final user = users[index % users.length];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 12,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => PostScreen(
+                                postTitle: post.title!,
+                                postBody: post.body!,
                               ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  MyText(
-                                    text: user.name!,
-                                    textClr: blackClr,
-                                    textSize: 16,
-                                    textWeight: FontWeight.w500,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  MyText(
-                                    text: post.body!,
-                                    textClr: Colors.blue.shade600,
-                                    textSize: 14,
-                                    textWeight: FontWeight.w400,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                      );
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 28,
+                          backgroundImage: AssetImage(
+                            chatPics[Random().nextInt(20)],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MyText(
+                                text: user.name!,
+                                textClr: blackClr,
+                                textSize: 16,
+                                textWeight: FontWeight.w500,
+                              ),
+                              const SizedBox(height: 4),
+                              MyText(
+                                text: post.body!,
+                                textClr: Colors.blue.shade600,
+                                textSize: 14,
+                                textWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -42,7 +42,7 @@ class CommentTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   MyText(
-                    text: "Lorem ipsum dolor sit amet",
+                    text: comments[Random().nextInt(15)],
                     textClr: blackClr,
                     textSize: 14,
                     textWeight: FontWeight.w400,
@@ -50,10 +50,13 @@ class CommentTile extends StatelessWidget {
                   SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(
-                        Icons.thumb_up_alt_outlined,
-                        size: 24,
-                        color: blueGreyClr,
+                      InkWell(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.thumb_up_alt_outlined,
+                          size: 24,
+                          color: blueGreyClr,
+                        ),
                       ),
                       SizedBox(width: 5),
                       MyText(
@@ -63,10 +66,13 @@ class CommentTile extends StatelessWidget {
                         textWeight: FontWeight.w400,
                       ),
                       SizedBox(width: 25),
-                      Icon(
-                        Icons.thumb_down_alt_outlined,
-                        size: 24,
-                        color: blueGreyClr,
+                      InkWell(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.thumb_down_alt_outlined,
+                          size: 24,
+                          color: blueGreyClr,
+                        ),
                       ),
                       SizedBox(width: 5),
                       MyText(

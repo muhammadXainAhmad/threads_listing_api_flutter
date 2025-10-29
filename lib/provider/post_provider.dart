@@ -7,10 +7,12 @@ class PostsProvider extends ChangeNotifier {
   List<UserModel> _users = [];
   List<PostModel> _posts = [];
   bool _isLoading = false;
+  String? _error;
 
   List<UserModel> get users => _users;
   List<PostModel> get posts => _posts;
   bool get isLoading => _isLoading;
+  String? get error => _error;
 
   Future<void> fetchData() async {
     _isLoading = true;
@@ -22,10 +24,9 @@ class PostsProvider extends ChangeNotifier {
 
       _users = userData;
       _posts = postData;
+      _error = null;
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching data: $e');
-      }
+      _error = e.toString();
     }
 
     _isLoading = false;

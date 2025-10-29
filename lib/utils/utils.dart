@@ -42,3 +42,21 @@ const months = [
   'Nov',
   'Dec',
 ];
+
+const comments = [
+  "Great post!",
+  "Interesting thoughts.",
+  "I totally agree.",
+  "Could you elaborate more?",
+  "Thanks for sharing this!",
+  "This is really insightful.",
+  "I never thought about it that way.",
+  "Well explained!",
+  "I have a question about this.",
+  "Amazing perspective!",
+  "I learned something new today.",
+  "Can you provide sources for this?",
+  "This is very helpful, thanks!",
+  "I disagree, here's why...",
+  "Looking forward to more posts like this.",
+];
