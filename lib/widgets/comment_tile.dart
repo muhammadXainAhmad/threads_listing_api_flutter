@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:threads_listing_api/utils/utils.dart';
 import 'package:threads_listing_api/widgets/text.dart';
@@ -26,7 +25,7 @@ class CommentTile extends StatelessWidget {
                   Row(
                     children: [
                       MyText(
-                        text: "Full Name",
+                        text: "",
                         textClr: blackClr,
                         textSize: 15,
                         textWeight: FontWeight.w500,
