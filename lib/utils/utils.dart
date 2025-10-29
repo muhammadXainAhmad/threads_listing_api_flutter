@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 const blackClr = Colors.black;
 const whiteClr = Colors.white;
+const greyClr = Color.fromRGBO(238, 238, 238, 1);
+const blueGreyClr = Color.fromRGBO(84, 110, 122, 1);
 
-var chatPics = [
+const chatPics = [
   "assets/faces10.png",
   "assets/faces11.png",
   "assets/faces12.png",
@@ -24,4 +26,19 @@ var chatPics = [
   "assets/faces4.png",
   "assets/faces9.png",
   "assets/faces8.png",
+];
+
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:threads_listing_api/utils/colors.dart';
+import 'package:threads_listing_api/screens/post_screen.dart';
+import 'package:threads_listing_api/utils/utils.dart';
 import 'package:threads_listing_api/widgets/text.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,13 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-            child: GestureDetector(onTap: () {
-              
-            },
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PostScreen()),
+                );
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
